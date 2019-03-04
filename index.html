@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JS Drum Kit</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <div class="keys">
+      <div data-key="65" class="key">
+        <kbd>A</kbd>
+        <span class="sound">Ape</span>
+      </div>
+      <div data-key="83" class="key">
+        <kbd>S</kbd>
+        <span class="sound">Splashing fish</span>
+      </div>
+      <div data-key="68" class="key">
+        <kbd>D</kbd>
+        <span class="sound">Congo Drummer</span>
+      </div>
+      <div data-key="70" class="key">
+        <kbd>F</kbd>
+        <span class="sound">Frog</span>
+      </div>
+      <div data-key="71" class="key">
+        <kbd>G</kbd>
+        <span class="sound">Gorilla</span>
+      </div>
+      <div data-key="72" class="key">
+        <kbd>H</kbd>
+        <span class="sound">Hoot Owl</span>
+      </div>
+      <div data-key="74" class="key">
+        <kbd>J</kbd>
+        <span class="sound">Jaguar</span>
+      </div>
+      <div data-key="75" class="key">
+        <kbd>K</kbd>
+        <span class="sound">Laughing Kookabarra</span>
+      </div>
+      <div data-key="76" class="key">
+        <kbd>L</kbd>
+        <span class="sound">Lion</span>
+      </div>
+    </div>
+
+    <audio
+      data-key="65"
+      src="http://soundbible.com/grab.php?id=1147&type=wav"
+    ></audio>
+    <audio
+      data-key="83"
+      src="http://soundbible.com/grab.php?id=223&type=wav"
+    ></audio>
+    <audio
+      data-key="68"
+      src="http://soundbible.com/grab.php?id=122&type=wav"
+    ></audio>
+    <audio
+      data-key="70"
+      src="http://soundbible.com/grab.php?id=251&type=wav"
+    ></audio>
+    <audio
+      data-key="71"
+      src="http://soundbible.com/grab.php?id=1149&type=wav"
+    ></audio>
+    <audio
+      data-key="72"
+      src="http://soundbible.com/grab.php?id=1157&type=wav"
+    ></audio>
+    <audio
+      data-key="74"
+      src="http://soundbible.com/grab.php?id=1130&type=wav"
+    ></audio>
+    <audio
+      data-key="75"
+      src="http://soundbible.com/grab.php?id=1786&type=wav"
+    ></audio>
+    <audio
+      data-key="76"
+      src="http://soundbible.com/grab.php?id=1282&type=wav"
+    ></audio>
+
+    <script>
+      window.addEventListener("keydown", function(e) {
+        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
+        if (!audio) return;
+        audio.currentTime = 0;
+        audio.play();
+        key.classList.add("playing");
+
+        // var x = document.createElement("IMG");
+        //     x.setAttribute(
+        //        "src",
+        //        "https:imgix.bustle.com/rehost/2016/9/13/567233b0-adac-4189-9bea-58d2a003943d.jpg?w=970&h=546&fit=crop&crop=faces&auto=format&q=70"
+        //      );
+        //      document.body.appendChild(x);
+        //    });
+
+        //     var i = document.createElement("IMG");
+        //     i.src =
+        //       "https://imgix.bustle.com/rehost/2016/9/13/567233b0-adac-4189-9bea-58d2a003943d.jpg?w=970&h=546&fit=crop&crop=faces&auto=format&q=70";
+        //     document.body.appendChild(i);
+        //   });
+
+        function removeTransition(e) {
+          if (e !== transform) {
+            console.log(e.propertyName);
+            this.classList.remove("playing");
+          }
+        }
+        const keys = document.querySelectorAll(".key");
+        keys.forEach(key =>
+          key.addEventListener("transitionend", removeTransition)
+        );
+
+        window.addEventListener("keydown", playSound);
+      });
+    </script>
+  </body>
+</html>
